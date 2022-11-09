@@ -16,12 +16,13 @@ public class Execution
   private long evaluations;
   private double fitness;
   private double mutationProbability;
+  private double deviationFromOptimumPercentage;
 
   public Execution(int geneNumber, double mutantGenes, double crossoverProbability) {
     this.crossoverProbability = crossoverProbability;
     this.geneNumber = geneNumber;
     geneSize = 1;
-    this.mutationProbability = mutantGenes/(double)((double) this.geneNumber *(double) geneSize);
+    this.mutationProbability = mutantGenes/((double) this.geneNumber *(double) geneSize);
   }
 
   public boolean isSolutionFound() {
@@ -46,6 +47,10 @@ public class Execution
 
   public int getGeneNumber() {
     return geneNumber;
+  }
+
+  public double getDeviationFromOptimumPercentage() {
+    return deviationFromOptimumPercentage;
   }
 
   public void execute() throws Exception
@@ -106,6 +111,11 @@ public class Execution
     //  System.out.print( (ga.get_solution()).get_allele(i) ); System.out.println();
     //System.out.println((ga.get_solution()).get_fitness());
     fitness = ga.get_solution().get_fitness();
+
+    double A2 = problem.get_target_fitness();
+    double B2 = fitness;
+
+    deviationFromOptimumPercentage = Math.abs((B2-A2)/A2) * 100;
   }
 
 }
