@@ -1,5 +1,9 @@
 package ga.ssGA;
 
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,7 +11,7 @@ public class Comparator {
 
     public static final int NUM_EXECUTIONS = 30;
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         List<Execution> executions = new ArrayList<>();
         executions.addAll(generateExecutions(512, 1, 0.8)); // Base line
         executions.addAll(generateExecutions(512, 1, 0.9)); // Changed Crossover
@@ -26,9 +30,12 @@ public class Comparator {
                 e.printStackTrace();
             }
         });
-        System.out.println("SolutionFound,Evaluations,Fitness,CrossoverProbability,MutationProbability(MutantGenes/GeneNumber),GeneNumber,DeviationFromOptimum(%),ExecutionNumber");
+        FileOutputStream file = new FileOutputStream("C:\\git\\ssga\\Runs.csv", false);
+        PrintStream out = new PrintStream(
+                file);
+        out.println("SolutionFound,Evaluations,Fitness,CrossoverProbability,MutationProbability(MutantGenes/GeneNumber),GeneNumber,DeviationFromOptimum(%),ExecutionNumber");
         for (Execution execution : executions) {
-            System.out.println(execution.isSolutionFound()
+            out.println(execution.isSolutionFound()
                     + "," + execution.getEvaluations()
                     + "," + execution.getFitness()
                     + "," + execution.getCrossoverProbability()
@@ -37,6 +44,8 @@ public class Comparator {
                     + "," + execution.getDeviationFromOptimumPercentage()
                     + "," + execution.getExecutionNumber());
         }
+        out.close();
+        file.close();
     }
 
     private static List<Execution> generateExecutions(int geneNumber, int mutantGenes, double crossoverProbability) {
