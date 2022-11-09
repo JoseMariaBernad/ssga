@@ -30,22 +30,21 @@ public class Comparator {
                 e.printStackTrace();
             }
         });
-        FileOutputStream file = new FileOutputStream("C:\\git\\ssga\\Runs.csv", false);
-        PrintStream out = new PrintStream(
-                file);
-        out.println("SolutionFound,Evaluations,Fitness,CrossoverProbability,MutationProbability(MutantGenes/GeneNumber),GeneNumber,DeviationFromOptimum(%),ExecutionNumber");
-        for (Execution execution : executions) {
-            out.println(execution.isSolutionFound()
-                    + "," + execution.getEvaluations()
-                    + "," + execution.getFitness()
-                    + "," + execution.getCrossoverProbability()
-                    + "," + execution.getMutationProbability()
-                    + "," + execution.getGeneNumber()
-                    + "," + execution.getDeviationFromOptimumPercentage()
-                    + "," + execution.getExecutionNumber());
+        // Create CSV file with results of executions
+        try (PrintStream out = new PrintStream(
+                new FileOutputStream("C:\\git\\ssga\\Runs.csv", false))) {
+            out.println("SolutionFound,Evaluations,Fitness,CrossoverProbability,MutationProbability(MutantGenes/GeneNumber),GeneNumber,DeviationFromOptimum(%),ExecutionNumber");
+            for (Execution execution : executions) {
+                out.println(execution.isSolutionFound()
+                        + "," + execution.getEvaluations()
+                        + "," + execution.getFitness()
+                        + "," + execution.getCrossoverProbability()
+                        + "," + execution.getMutationProbability()
+                        + "," + execution.getGeneNumber()
+                        + "," + execution.getDeviationFromOptimumPercentage()
+                        + "," + execution.getExecutionNumber());
+            }
         }
-        out.close();
-        file.close();
     }
 
     private static List<Execution> generateExecutions(int geneNumber, int mutantGenes, double crossoverProbability) {
