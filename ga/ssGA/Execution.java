@@ -118,10 +118,9 @@ public class Execution
     //System.out.println((ga.get_solution()).get_fitness());
     fitness = ga.get_solution().get_fitness();
 
-    double A2 = problem.get_target_fitness();
-    double B2 = fitness;
+    double targetFitness = problem.get_target_fitness();
 
-    deviationFromOptimumPercentage = Math.abs((B2-A2)/A2) * 100;
+    deviationFromOptimumPercentage = Math.abs((fitness - targetFitness)/targetFitness) * 100;
   }
 
 }
