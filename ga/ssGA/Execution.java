@@ -9,6 +9,7 @@ package ga.ssGA;
 
 public class Execution
 {
+  private final int executionNumber;
   private final double crossoverProbability;
   private final int geneNumber;
   private final int geneSize;
@@ -18,7 +19,8 @@ public class Execution
   private double mutationProbability;
   private double deviationFromOptimumPercentage;
 
-  public Execution(int geneNumber, double mutantGenes, double crossoverProbability) {
+  public Execution(int executionNumber, int geneNumber, double mutantGenes, double crossoverProbability) {
+    this.executionNumber = executionNumber;
     this.crossoverProbability = crossoverProbability;
     this.geneNumber = geneNumber;
     geneSize = 1;
@@ -51,6 +53,10 @@ public class Execution
 
   public double getDeviationFromOptimumPercentage() {
     return deviationFromOptimumPercentage;
+  }
+
+  public int getExecutionNumber() {
+    return executionNumber;
   }
 
   public void execute() throws Exception

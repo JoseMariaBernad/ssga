@@ -26,7 +26,7 @@ public class Comparator {
                 e.printStackTrace();
             }
         });
-        System.out.println("SolutionFound,Evaluations,Fitness,CrossoverProbability,MutationProbability(MutantGenes/GeneNumber),GeneNumber,DeviationFromOptimum(%)");
+        System.out.println("SolutionFound,Evaluations,Fitness,CrossoverProbability,MutationProbability(MutantGenes/GeneNumber),GeneNumber,DeviationFromOptimum(%),ExecutionNumber");
         for (Execution execution : executions) {
             System.out.println(execution.isSolutionFound()
                     + "," + execution.getEvaluations()
@@ -34,14 +34,15 @@ public class Comparator {
                     + "," + execution.getCrossoverProbability()
                     + "," + execution.getMutationProbability()
                     + "," + execution.getGeneNumber()
-                    + "," + execution.getDeviationFromOptimumPercentage());
+                    + "," + execution.getDeviationFromOptimumPercentage()
+                    + "," + execution.getExecutionNumber());
         }
     }
 
     private static List<Execution> generateExecutions(int geneNumber, int mutantGenes, double crossoverProbability) {
         List<Execution> executions = new ArrayList<>();
         for (int x = 0; x< NUM_EXECUTIONS; x++) {
-            executions.add(new Execution(geneNumber, mutantGenes, crossoverProbability));
+            executions.add(new Execution(x, geneNumber, mutantGenes, crossoverProbability));
         }
         return executions;
     }
