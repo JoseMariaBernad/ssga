@@ -7,7 +7,7 @@ import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Comparator {
+public class ExecutionsLauncher {
 
     public static final int NUM_EXECUTIONS = 30;
 
@@ -23,7 +23,9 @@ public class Comparator {
         executions.addAll(generateExecutions(1024, 4, 0.8));
 
 
-        executions.parallelStream().forEach(execution -> {
+        executions
+                .parallelStream()
+                .forEach(execution -> {
             try {
                 execution.execute();
             } catch (Exception e) {
