@@ -19,9 +19,9 @@ public class ExecutionsLauncher {
         executions.addAll(generateExecutions(512, 2, 0.8)); // Changed Mutation probability
 
         // Problem size of 1024
-        executions.addAll(generateExecutions(1024, 2, 0.8));
-        executions.addAll(generateExecutions(1024, 2, 0.9));
-        executions.addAll(generateExecutions(1024, 4, 0.8));
+        executions.addAll(generateExecutions(1024, 2, 0.8)); // Base line
+        executions.addAll(generateExecutions(1024, 2, 0.9)); // Changed Crossover
+        executions.addAll(generateExecutions(1024, 4, 0.8)); // Changed Mutation probability
 
 
         executions
