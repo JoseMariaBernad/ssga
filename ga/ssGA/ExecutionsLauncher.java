@@ -13,11 +13,12 @@ public class ExecutionsLauncher {
 
     public static void main(String[] args) throws IOException {
         List<Execution> executions = new ArrayList<>();
+        // Problem size of 512
         executions.addAll(generateExecutions(512, 1, 0.8)); // Base line
         executions.addAll(generateExecutions(512, 1, 0.9)); // Changed Crossover
         executions.addAll(generateExecutions(512, 2, 0.8)); // Changed Mutation probability
 
-
+        // Problem size of 1024
         executions.addAll(generateExecutions(1024, 2, 0.8));
         executions.addAll(generateExecutions(1024, 2, 0.9));
         executions.addAll(generateExecutions(1024, 4, 0.8));
