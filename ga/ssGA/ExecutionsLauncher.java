@@ -13,17 +13,18 @@ public class ExecutionsLauncher {
 
     public static void main(String[] args) throws IOException {
         List<Execution> executions = new ArrayList<>();
+        // 1. Generate executions with different parameters and problem sizes
         // Problem size of 512
-        executions.addAll(generateExecutions(512, 1, 0.8)); // Base line
-        executions.addAll(generateExecutions(512, 1, 0.9)); // Changed Crossover
+        executions.addAll(generateExecutions(512, 1, 0.8)); // Baseline
+        executions.addAll(generateExecutions(512, 1, 0.9)); // Changed Crossover probability
         executions.addAll(generateExecutions(512, 2, 0.8)); // Changed Mutation probability
 
         // Problem size of 1024
-        executions.addAll(generateExecutions(1024, 2, 0.8)); // Base line
-        executions.addAll(generateExecutions(1024, 2, 0.9)); // Changed Crossover
+        executions.addAll(generateExecutions(1024, 2, 0.8)); // Baseline
+        executions.addAll(generateExecutions(1024, 2, 0.9)); // Changed Crossover probability
         executions.addAll(generateExecutions(1024, 4, 0.8)); // Changed Mutation probability
 
-
+        // 2. Run all executions in parallel in order to optimize execution time
         executions
                 .parallelStream()
                 .forEach(execution -> {
@@ -33,7 +34,7 @@ public class ExecutionsLauncher {
                 e.printStackTrace();
             }
         });
-        // Create CSV file with results of executions
+        // 3. Create CSV file with results of executions
         try (PrintStream out = new PrintStream(
                 new FileOutputStream("C:\\git\\ssga\\Runs.csv", false))) {
             out.println("SolutionFound,Evaluations,Fitness,CrossoverProbability,MutationProbability(MutantGenes/GeneNumber),GeneNumber,DeviationFromOptimum(%),ExecutionNumber");
